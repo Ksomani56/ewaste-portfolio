@@ -77,6 +77,9 @@ button.op:before{content:"";position:absolute;inset:0;background:var(--ac);trans
 button.op:hover:before{transform:none}button.op span{position:relative}
 button.op:hover{transform:translateY(-3px)}button.op:active{transform:scale(.92)}
 .shake{animation:sh .45s}@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.spinner{width:32px;height:32px;border:3px solid color-mix(in srgb,var(--ink) 20%,transparent);border-top-color:var(--ac);border-radius:50%;animation:spin .75s linear infinite;display:inline-block}
+.btn-spin{width:11px;height:11px;border:2px solid color-mix(in srgb,var(--bg) 35%,transparent);border-top-color:var(--bg);border-radius:50%;animation:spin .65s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
+.spin-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 12px;text-align:center}
 dialog{border:2px solid var(--ink);border-radius:0;background:var(--bg);color:var(--ink);padding:0;max-width:min(92vw,960px);width:100%}
 dialog::backdrop{background:rgba(20,18,14,.7)}dialog[open]{animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
 @keyframes pop{from{opacity:0;transform:scale(.7) rotate(-3deg)}}
@@ -159,13 +162,23 @@ const dlg=$("#dlg");
 $("#list").innerHTML=ITEMS.map((x,i)=>`<div class="row" data-r="${i%2?"r":"l"}" data-k="${x.k=="none"?"no":"ok"}"><div class="th mono">${x.k=="img"?`<img loading="lazy" src="${x.u}" alt="">`:x.k=="pdf"?"PDF":x.k=="xls"?"XLSX":"—"}</div><div><h3>${x.t}</h3><p>${x.d}</p><div class="meta mono">${x.f}</div></div><button class="op mono" data-i="${i}"><span>Open</span></button></div>`).join("");
 $$(".chip[data-f]").forEach(c=>c.onclick=()=>{$$(".chip[data-f]").forEach(z=>z.classList.toggle("on",z==c));$$(".row").forEach(r=>{const h=c.dataset.f!="all"&&r.dataset.k!=c.dataset.f;r.style.display=h?"none":""})});
 $$(".th").forEach(t=>{t.parentElement.onpointermove=e=>{const r=t.getBoundingClientRect();t.style.transform=`perspective(300px) rotateY(${((e.clientX-r.left)/r.width-.5)*30}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*30}deg)`};t.parentElement.onpointerleave=()=>t.style.transform=""});
-function show(t,h){$("#dt").textContent=t;$("#dbody").innerHTML=h;dlg.showModal()}
+function show(t,h){$("#dt").textContent=t;$("#dbody").innerHTML=h;if(!dlg.open)dlg.showModal()}
+let pendTimer=null;
 $$("button.op").forEach(b=>b.onclick=()=>{const x=ITEMS[b.dataset.i];
 if(x.k=="img"){show(x.t,`<img src="${x.u}" alt="${x.t}">`);boom()}
 else if(x.k=="pdf"){window.open(x.u,"_blank");boom()}
 else if(x.k=="xls"){const a=document.createElement("a");a.href=x.u;a.download="";a.click();boom()}
-else{b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");setTimeout(()=>show(x.t,"<p><b>Not available yet.</b> This file hasn’t been added to the portfolio.</p>"),380)}});
-$("#dc").onclick=()=>dlg.close();dlg.onclick=e=>{if(e.target==dlg)dlg.close()};
+else{
+b.innerHTML='<span><span class="btn-spin"></span>Loading...</span>';
+clearTimeout(pendTimer);
+show(x.t,`<div class="spin-box"><div class="spinner"></div><div class="mono" style="margin-top:14px;font-size:12px;letter-spacing:.08em;color:var(--mut)">CHECKING ARCHIVE REPOSITORY...</div></div>`);
+pendTimer=setTimeout(()=>{
+b.innerHTML='<span>Open</span>';
+b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");
+if(dlg.open)$("#dbody").innerHTML='<p><b>Not available yet.</b> This file hasn’t been added to the portfolio.</p>';
+},850);
+}});
+$("#dc").onclick=()=>{clearTimeout(pendTimer);dlg.close()};dlg.onclick=e=>{if(e.target==dlg){clearTimeout(pendTimer);dlg.close()}};
 // reveal + counters
 const cnt=el=>{const n=+el.dataset.n,s=el.dataset.s||"",t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e).toLocaleString("en-IN")+s;if(p<1)requestAnimationFrame(f)})(t0)};
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);e.target.querySelectorAll&&e.target.querySelectorAll("[data-n]").forEach(cnt)}}),{threshold:.15});
