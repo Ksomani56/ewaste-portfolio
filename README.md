@@ -27,6 +27,7 @@ This static web application features:
 - **Uttar Pradesh State E-Waste Dashboard**: Interactive tracking of generation vs. collection across 6 key industrial districts (Lucknow, Kanpur, Ghaziabad, Gautam Buddh Nagar, Varanasi, Agra).
 - **100-Point State Scorecard**: Audited scores across 7 key compliance categories (Generation, Collection, Formal Recycling, Regulatory Compliance, Informal Sector Integration, Environmental & Health Safeguards, Awareness).
 - **Interactive Periodic Elements Viewer**: 3D-flippable element cards detailing critical recoverable materials (Ta, Nb, Ga, Pd, Rare Earths).
+- **Everyday Tech Anatomy Explorer**: Practical consumer electronics breakdown (Smartphones, Laptops, Chargers/Cables, Batteries) detailing critical raw materials per unit, toxic disposal hazards, and student pre-disposal protocols.
 - **Coursework Archive**: Direct access to case studies, analytical workbooks, and high-resolution infographics.
 
 ---
@@ -115,3 +116,4 @@ If your browser flags the download, it is due to default browser heuristics on n
 - **Roll Number:** 24102C0067
 - **Department:** Computer Engineering
 - **Institution:** Vellore Institute of Technology (VIT)
+

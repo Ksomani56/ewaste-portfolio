@@ -80,6 +80,20 @@ button.op:hover{transform:translateY(-3px)}button.op:active{transform:scale(.92)
 .spinner{width:32px;height:32px;border:3px solid color-mix(in srgb,var(--ink) 20%,transparent);border-top-color:var(--ac);border-radius:50%;animation:spin .75s linear infinite;display:inline-block}
 .btn-spin{width:11px;height:11px;border:2px solid color-mix(in srgb,var(--bg) 35%,transparent);border-top-color:var(--bg);border-radius:50%;animation:spin .65s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
 .spin-box{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 12px;text-align:center}
+.comp-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;border:1px solid var(--ink);padding:14px;margin-top:20px;background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.comp-strip div{border-left:2px solid var(--ac);padding-left:10px}
+.comp-strip b{display:block;font-size:22px;color:var(--ac);line-height:1.2}
+.comp-strip span{font-size:11px;color:var(--mut)}
+.dev-card{border:1px solid var(--ink);padding:18px;margin-top:14px;background:var(--bg)}
+.dev-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:12px}
+.dev-top h3{margin:0;font-size:22px}.dev-top span{font-size:12px;color:var(--ac)}
+.dev-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:720px){.dev-grid{grid-template-columns:1.2fr 1fr}}
+.yield-box{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.yield-item{border:1px solid color-mix(in srgb,var(--ink) 25%,transparent);padding:8px 10px;background:color-mix(in srgb,var(--ink) 3%,transparent)}
+.yield-item b{display:block;font-size:13px;color:var(--ac)}.yield-item span{font-size:11px;color:var(--mut)}
+.hz-box{border:1px solid var(--ink);padding:12px;background:color-mix(in srgb,var(--ac) 8%,transparent);margin-top:12px;font-size:13px}
+.hz-box b{color:var(--ac);display:block;font-size:11px;letter-spacing:.08em;margin-bottom:4px}
 dialog{border:2px solid var(--ink);border-radius:0;background:var(--bg);color:var(--ink);padding:0;max-width:min(92vw,960px);width:100%}
 dialog::backdrop{background:rgba(20,18,14,.7)}dialog[open]{animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
 @keyframes pop{from{opacity:0;transform:scale(.7) rotate(-3deg)}}
@@ -117,13 +131,24 @@ footer{position:relative;z-index:1;max-width:960px;margin:40px auto 0;padding:10
 <div class="els" id="el"></div>
 </section>
 
-<section id="arch" data-t="4"><div class="big" data-px="-.1">12</div>
-<h2 data-r="l"><i>04 </i>The archive</h2>
+<section id="devs" data-t="4"><div class="big" data-px=".12">Au</div>
+<h2 data-r="l"><i>04 </i>Everyday tech anatomy · select a device</h2>
+<div class="chips" data-r="u" id="dtabs"></div>
+<div id="dev-detail" data-r="u" style="--d:120ms"></div>
+<div class="comp-strip mono" data-r="u" style="--d:240ms">
+<div><b>50×</b><span>Gold concentration in phone PCBs vs mined gold ore (300g/t vs 5g/t)</span></div>
+<div><b>70%</b><span>Landfill heavy metal toxicity stemming from only 2% e-waste volume</span></div>
+<div><b>NIST</b><span>800-88 sanitization & terminal insulation protocol before disposal</span></div>
+</div>
+</section>
+
+<section id="arch" data-t="5"><div class="big" data-px="-.1">12</div>
+<h2 data-r="l"><i>05 </i>The archive</h2>
 <div class="chips" data-r="u"><button class="chip on" data-f="all">All</button><button class="chip" data-f="ok">Available</button></div>
 <div id="list"></div>
 </section>
 </main>
-<footer data-t="5">Krishna Somani · Roll No. 24102C0067 · Department of Computer Engineering, VIT</footer>
+<footer data-t="6">Krishna Somani · Roll No. 24102C0067 · Department of Computer Engineering, VIT</footer>
 <dialog id="dlg"><div class="dh"><b id="dt"></b><button class="chip" id="dc">Close</button></div><div class="db" id="dbody"></div></dialog>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -157,6 +182,20 @@ $$("#sc .line").forEach(b=>b.onclick=()=>b.nextElementSibling.classList.toggle("
 // elements
 $("#el").innerHTML=EL.map((e,i)=>`<div class="tile mono" tabindex="0" data-r="u" style="--d:${i*110}ms"><div><div class="a"><em>${e[0]}</em><strong>${e[1]}</strong><span>${e[2]}<br>${e[3]}</span></div><div class="b">${e[4]}</div></div></div>`).join("");
 $$(".tile").forEach(t=>{t.onclick=()=>t.classList.toggle("f");t.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();t.classList.toggle("f")}}});
+// devices
+const DEVS=[
+{n:"Smartphones",sub:"2.2 yr lifespan · 1.4B units sold annually",desc:"Phones concentrate intense precious metal density in a tiny form factor, but composite epoxy potting and mini Li-ion cells create high dismantling complexity.",yields:[["Gold (Au)","~0.034 g","Direct wire bonds"],["Silver (Ag)","~0.35 g","Surface mount solder"],["Copper (Cu)","~15 g","Antenna & coils"],["Cobalt (Co)","~8 g","Cathode chemistry"]],hazard:"Battery punctures cause violent thermal runaway. Acid leaching of phone boards in unventilated workshops emits cyanide & dioxin fumes.",action:"Perform cryptographic factory wipe; never discard in regular bins; tape battery contacts before collection."},
+{n:"Laptops & Tablets",sub:"4–5 yr lifespan · High modularity",desc:"Laptops yield multi-layer motherboards rich in tantalum, high-grade silicon, neodymium magnets, and aerospace-grade aluminum chassis.",yields:[["Tantalum (Ta)","~0.25 g","High-stability caps"],["Neodymium (Nd)","~1.2 g","Speakers & HDD/fan"],["Aluminum (Al)","~450 g","Machined casing"],["Tin-Lead (Sn-Pb)","~30 g","Interconnects"]],hazard:"Brominated Flame Retardants (BFRs) in motherboard epoxy emit toxic brominated dioxins if incinerated below 1,100°C.",action:"Back up storage, remove peripheral battery if detachable, deliver directly to verified WEEE recyclers."},
+{n:"Chargers & Cables",sub:"1.5 yr lifespan · 50,000+ t wire waste",desc:"Fastest-growing accessory waste category. Copper recovery efficiency from stranded wire exceeds 98% with automated mechanical granulators.",yields:[["Electrolytic Cu","~65% by wt","High-purity core"],["Brass (Cu-Zn)","~15 g","Plug prongs & pins"],["PVC / TPE","~30% by wt","Thermoplastic jacket"],["Ferrite","~12 g","Noise suppression beads"]],hazard:"Informal cable burning melts off PVC to recover bare copper, releasing carcinogenic airborne dioxins and persistent plasticizers.",action:"Never burn or cut cables; bundle together for direct mechanical stripping at formal facilities."},
+{n:"Batteries & Power",sub:"300–500 cycles · Chemical fire risk",desc:"Lithium nickel manganese cobalt (NMC) and lithium iron phosphate (LFP) chemistries represent high-priority strategic circular minerals.",yields:[["Lithium (Li)","~2.4 g","Charge carrier salts"],["Cobalt (Co)","~12 g","Layered cathode"],["Nickel (Ni)","~18 g","Energy density matrix"],["Graphite (C)","~22 g","Anode intercalation"]],hazard:"Water ingress or mechanical compression in garbage compactors causes explosive fires. Heavy metals contaminate underground aquifers.",action:"Insulate terminals with electrical tape; store in a dry, non-conductive box before dropping at battery bins."}
+];
+function renderDev(idx){
+const d=DEVS[idx];
+$("#dtabs").innerHTML=DEVS.map((x,i)=>`<button class="chip ${i==idx?"on":""}" data-di="${i}">${x.n}</button>`).join("");
+$$("#dtabs .chip").forEach(b=>b.onclick=()=>renderDev(+b.dataset.di));
+$("#dev-detail").innerHTML=`<div class="dev-card"><div class="dev-top"><h3>${d.n}</h3><span class="mono">${d.sub}</span></div><div class="dev-grid"><div><p style="margin:0 0 12px;font-size:14px">${d.desc}</p><div class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">CRITICAL MATERIALS PER UNIT:</div><div class="yield-box mono">${d.yields.map(y=>`<div class="yield-item"><b>${y[0]} · ${y[1]}</b><span>${y[2]}</span></div>`).join("")}</div></div><div><div class="hz-box"><b class="mono">⚠ IMPROPER DISPOSAL HAZARD</b>${d.hazard}</div><div class="hz-box" style="background:color-mix(in srgb,var(--ink) 5%,transparent);border-color:var(--ink);margin-top:8px"><b class="mono" style="color:var(--ink)">✓ STUDENT PROTOCOL BEFORE DISPOSAL</b>${d.action}</div></div></div></div>`;
+}
+renderDev(0);
 // archive
 const dlg=$("#dlg");
 $("#list").innerHTML=ITEMS.map((x,i)=>`<div class="row" data-r="${i%2?"r":"l"}" data-k="${x.k=="none"?"no":"ok"}"><div class="th mono">${x.k=="img"?`<img loading="lazy" src="${x.u}" alt="">`:x.k=="pdf"?"PDF":x.k=="xls"?"XLSX":"—"}</div><div><h3>${x.t}</h3><p>${x.d}</p><div class="meta mono">${x.f}</div></div><button class="op mono" data-i="${i}"><span>Open</span></button></div>`).join("");
@@ -186,7 +225,7 @@ $$("[data-r]").forEach(e=>io.observe(e));
 // score total counts when visible
 const tot=$(".tot"),tio=new IntersectionObserver(es=>{if(es[0].isIntersecting){tio.disconnect();const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1800);tot.firstChild.nodeValue=Math.round(72*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}});tio.observe(tot);
 // colour journey on scroll
-const STOPS=[["#f4efe3","#1b1a17","#d9731a","#6b665a"],["#f6d9ae","#1f1608","#b3470f","#6b5430"],["#cfe2d2","#10231a","#c2410c","#3f5a4a"],["#1b1a17","#f4efe3","#f2a33a","#b5ae9a"],["#ecd2ca","#2a1411","#a63d2b","#6e5650"],["#f4efe3","#1b1a17","#d9731a","#6b665a"]].map(r=>r.map(h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16))));
+const STOPS=[["#f4efe3","#1b1a17","#d9731a","#6b665a"],["#f6d9ae","#1f1608","#b3470f","#6b5430"],["#cfe2d2","#10231a","#c2410c","#3f5a4a"],["#1b1a17","#f4efe3","#f2a33a","#b5ae9a"],["#e6ded3","#1a1e1b","#2a6645","#5b6158"],["#ecd2ca","#2a1411","#a63d2b","#6e5650"],["#f4efe3","#1b1a17","#d9731a","#6b665a"]].map(r=>r.map(h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16))));
 const secs=$$("[data-t]"),root=document.documentElement;let CUR=STOPS[0];
 function theme(){const y=scrollY+innerHeight*.5,c=secs.map(s=>s.offsetTop+s.offsetHeight/2);let i=0;while(i<c.length-2&&y>c[i+1])i++;const t=Math.max(0,Math.min(1,(y-c[i])/(c[i+1]-c[i]))),e=t*t*(3-2*t);
 CUR=STOPS[i].map((a,k)=>a.map((v,j)=>Math.round(v+(STOPS[i+1][k][j]-v)*e)));
