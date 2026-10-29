@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krishna Somani | E-Waste Portfolio</title>
+<style>
+:root{--bg:#f4efe3;--ink:#1b1a17;--ac:#d9731a;--mut:#6b665a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif;overflow-x:hidden}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:60;pointer-events:none}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--ac);z-index:70}
+main{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 18px}
+section{padding:70px 0 30px;position:relative}
+.mast{margin-top:8px;border-top:4px solid var(--ink);border-bottom:1px solid var(--ink);padding:10px 0;display:flex;justify-content:space-between;gap:12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.tick{overflow:hidden;border-bottom:1px solid var(--ink);font-size:13px;white-space:nowrap}
+.tick div{display:inline-block;padding:7px 0;animation:mq 38s linear infinite}
+.tick span{margin:0 22px}.tick span:before{content:"\25C6";color:var(--ac);margin-right:10px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.hero{padding-top:44px;min-height:78vh}
+h1{font-size:clamp(40px,9vw,76px);line-height:1;margin:0 0 14px;letter-spacing:-.02em}
+.ch{display:inline-block;opacity:0;transform:translateY(40px) rotateX(-90deg);animation:chIn .7s cubic-bezier(.2,1.3,.4,1) forwards}
+.ch.s{color:var(--ac)}
+@keyframes chIn{to{opacity:1;transform:none}}
+.lede{max-width:560px;color:var(--mut);margin:0 0 28px}
+.ring{position:absolute;right:-60px;top:20px;width:min(60vw,380px);opacity:.4;animation:spin 46s linear infinite;z-index:-1}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.stats div{padding:14px 12px;border-left:1px solid var(--ink)}.stats div:first-child{border:0;padding-left:0}
+.stats b{display:block;font-size:clamp(22px,5vw,36px);color:var(--ac)}
+.stats span{font-size:12px;color:var(--mut)}
+h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 20px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+h2 i{color:var(--ac);font-style:normal}
+.big{position:absolute;right:0;top:20px;font-size:clamp(90px,26vw,220px);font-weight:700;color:transparent;-webkit-text-stroke:1px var(--ink);opacity:.14;z-index:-1;line-height:1}
+[data-r]{opacity:0;transition:opacity .8s,transform .8s cubic-bezier(.2,.9,.3,1);transition-delay:var(--d,0ms)}
+[data-r=l]{transform:translateX(-60px)}[data-r=r]{transform:translateX(60px)}[data-r=u]{transform:translateY(50px)}[data-r=z]{transform:scale(.8) rotate(-2deg)}
+[data-r].in{opacity:1;transform:none}
+.two{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:760px){.two{grid-template-columns:1.5fr 1fr}}
+.dr{display:grid;grid-template-columns:92px 1fr 46px;gap:8px;align-items:center;font-size:13px;margin:9px 0}
+.tr{height:9px;background:color-mix(in srgb,var(--ink) 12%,transparent);margin-bottom:3px;overflow:hidden}
+.tr i{display:block;height:100%;width:0;background:var(--ac);transition:width 1.4s cubic-bezier(.2,.9,.3,1) .2s}
+.tr.g i{background:var(--ink)}.in .tr i{width:var(--w)}
+.leg{font-size:12px;color:var(--mut);margin-top:8px}.leg b{display:inline-block;width:10px;height:10px;margin:0 5px 0 12px;background:var(--ac)}.leg b.k{background:var(--ink);margin-left:0}
+.donut{width:190px;max-width:100%;display:block;margin:0 auto}
+.donut circle{fill:none;stroke-width:16}.dn1{stroke:color-mix(in srgb,var(--ink) 14%,transparent)}
+.dn2{stroke:var(--ac);stroke-dasharray:326.7;stroke-dashoffset:326.7;transition:stroke-dashoffset 1.8s cubic-bezier(.2,.9,.3,1) .3s;transform:rotate(-90deg);transform-origin:60px 60px}
+.in .dn2{stroke-dashoffset:calc(326.7 * (1 - var(--p)))}
+.sc{border-top:1px solid var(--ink)}
+.sc button.line{all:unset;display:grid;grid-template-columns:1fr 64px;gap:4px 12px;width:100%;padding:12px 0;cursor:pointer;border-bottom:1px solid var(--ink);align-items:center;box-sizing:border-box;transition:padding .3s}
+.sc button.line:hover{padding-left:12px}
+.sc .tr{grid-column:1/3;height:12px;margin:0}.sc .v{text-align:right;color:var(--ac)}
+.det{max-height:0;overflow:hidden;font-size:14px;color:var(--mut);transition:max-height .5s,padding .5s;border-bottom:1px solid var(--ink)}
+.det.o{max-height:120px;padding:10px 0}
+.tot{font-size:clamp(50px,14vw,96px);color:var(--ac);margin:18px 0 0;line-height:1}
+.els{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tile{perspective:800px;height:200px;cursor:pointer;outline:none}
+.tile>div{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,1.2,.4,1);transform-style:preserve-3d}
+.tile.f>div{transform:rotateY(180deg)}
+.tile .a,.tile .b{position:absolute;inset:0;border:2px solid var(--ink);backface-visibility:hidden;padding:12px;display:flex;flex-direction:column;justify-content:space-between;background:var(--bg)}
+.tile .b{transform:rotateY(180deg);background:var(--ink);color:var(--bg);font-size:13px;justify-content:center}
+.tile em{font-style:normal;font-size:12px}.tile strong{font-size:56px;line-height:1;color:var(--ac)}
+.tile:hover>div{animation:bob 1s ease-in-out infinite}.tile.f:hover>div{animation:none}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.chip{font:600 12px ui-monospace,Menlo,monospace;border:1px solid var(--ink);padding:7px 12px;cursor:pointer;background:transparent;color:var(--ink);transition:.25s;border-radius:0}
+.chip.on,.chip:hover{background:var(--ink);color:var(--bg)}
+.row{display:grid;grid-template-columns:72px 1fr auto;gap:6px 16px;padding:14px 0;border-bottom:1px solid var(--ink);align-items:center;position:relative;transition:transform .35s cubic-bezier(.2,1.2,.4,1)}
+.row:hover{transform:translateX(10px)}
+.row:after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--ac);transition:width .5s}.row:hover:after{width:100%}
+.th{width:72px;height:72px;border:1px solid var(--ink);display:grid;place-items:center;overflow:hidden;font-size:11px;transition:transform .15s;transform-style:preserve-3d}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.row h3{margin:0;font-size:18px}.row p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.meta{font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-top:5px}.meta .no{color:var(--ac)}
+button.op{position:relative;overflow:hidden;font:600 13px ui-monospace,Menlo,monospace;background:var(--ink);color:var(--bg);border:1px solid var(--ink);padding:11px 18px;cursor:pointer;border-radius:0;transition:transform .15s}
+button.op:before{content:"";position:absolute;inset:0;background:var(--ac);transform:translateX(-101%);transition:transform .35s}
+button.op:hover:before{transform:none}button.op span{position:relative}
+button.op:hover{transform:translateY(-3px)}button.op:active{transform:scale(.92)}
+.shake{animation:sh .45s}@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+dialog{border:2px solid var(--ink);border-radius:0;background:var(--bg);color:var(--ink);padding:0;max-width:min(92vw,960px);width:100%}
+dialog::backdrop{background:rgba(20,18,14,.7)}dialog[open]{animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{opacity:0;transform:scale(.7) rotate(-3deg)}}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--ink)}
+.db{padding:14px;max-height:78vh;overflow:auto}.db img{width:100%;display:block}
+footer{position:relative;z-index:1;max-width:960px;margin:40px auto 0;padding:10px 18px 50px;border-top:4px solid var(--ink);font-size:12px;color:var(--mut)}
+@media(max-width:560px){.row{grid-template-columns:72px 1fr}.row button.op{grid-column:1/3}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ch,[data-r]{opacity:1;transform:none}}
+</style></head><body>
+<canvas id="bg"></canvas><canvas id="fx"></canvas><div id="bar"></div>
+<main>
+<section class="hero" data-t="0" style="padding-top:8px">
+<div class="mast"><span>E-Waste Management · Semester Archive</span><span class="mono">VIT · Computer Engineering</span></div>
+<div class="tick mono"><div id="tk"></div></div>
+<svg class="ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="86" fill="none" stroke="var(--ac)" stroke-width="3" stroke-dasharray="14 10"/><circle cx="100" cy="100" r="64" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 8"/><g fill="var(--ac)"><path d="M100 8l12 18h-24z"/><path d="M178 146l-21-4 12-16z" transform="rotate(8 100 100)"/><path d="M22 146l9-19 12 15z" transform="rotate(-8 100 100)"/></g></svg>
+<div style="padding-top:44px"><h1 id="h1" aria-label="Krishna Somani E-Waste Portfolio"></h1>
+<p class="lede" data-r="u" style="--d:900ms">Reports, workbooks, infographics and handwritten work from the e-waste management course. Scroll down, flip the tiles, tap Open on any row.</p>
+<div class="stats" data-r="u" style="--d:1100ms"><div><b class="mono" data-n="72" data-s="/100">0</b><span>UP state score (Good band)</span></div><div><b class="mono" data-n="3238" data-s=" t">0</b><span>Generated, 6 UP districts</span></div><div><b class="mono" data-n="7">0</b><span>Scorecard categories</span></div></div></div>
+</section>
+
+<section id="dash" data-t="1"><div class="big" data-px=".15">UP</div>
+<h2 data-r="l"><i>01 </i>Uttar Pradesh dashboard</h2>
+<div class="two"><div data-r="l"><div class="mono" style="font-size:12px;margin-bottom:6px">GENERATED vs COLLECTED (TONNES)</div><div id="dist"></div><div class="leg mono"><b class="k"></b>Generated<b></b>Collected</div></div>
+<div data-r="r"><div class="mono" style="font-size:12px;margin-bottom:6px;text-align:center">EPR ENTITIES FULLY COMPLIANT</div><svg class="donut" viewBox="0 0 120 120" style="--p:.667"><circle class="dn1" cx="60" cy="60" r="52"/><circle class="dn2" cx="60" cy="60" r="52"/><text x="60" y="68" text-anchor="middle" font-size="22" class="mono" fill="currentColor">66.7%</text></svg><p class="leg" style="text-align:center">6 entities tracked · 2 penalties · 1 resolved</p></div></div>
+</section>
+
+<section id="score" data-t="2"><div class="big" data-px="-.12">72</div>
+<h2 data-r="l"><i>02 </i>Scorecard · tap a row</h2>
+<div class="sc" id="sc"></div>
+<div class="tot mono" data-r="z">0<small style="font-size:.32em;color:var(--ink)"> / 100 · GOOD</small></div>
+</section>
+
+<section id="els" data-t="3"><div class="big" data-px=".1">Ta</div>
+<h2 data-r="l"><i>03 </i>The elements · tap to flip</h2>
+<div class="els" id="el"></div>
+</section>
+
+<section id="arch" data-t="4"><div class="big" data-px="-.1">12</div>
+<h2 data-r="l"><i>04 </i>The archive</h2>
+<div class="chips" data-r="u"><button class="chip on" data-f="all">All</button><button class="chip" data-f="ok">Available</button></div>
+<div id="list"></div>
+</section>
+</main>
+<footer data-t="5">Krishna Somani · Roll No. 24102C0067 · Department of Computer Engineering, VIT</footer>
+<dialog id="dlg"><div class="dh"><b id="dt"></b><button class="chip" id="dc">Close</button></div><div class="db" id="dbody"></div></dialog>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],RM=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const DIST=[["Lucknow",520,340],["Kanpur Nagar",600,360],["Ghaziabad",652,430],["Gautam B. Nagar",600,410],["Varanasi",392,200],["Agra",474,260]];
+const SC=[["Generation & Inventory",15,15,"All six districts report; category-wise breakup complete."],["Collection Performance",20,11.5,"Collection sits below the 70% benchmark; 12 to 20 centres per district."],["Formal Recycling & Treatment",20,20,"5 authorised recyclers, 23,000 t/yr capacity. Strongest category."],["Regulatory Compliance",15,10,"6 EPR entities, two-thirds fully compliant; 2 penalties, 1 resolved."],["Informal Sector Integration",10,2.5,"4 hotspots, only partly formalised; 25% weighted score."],["Environmental & Health",10,10,"515 residents screened; 3 of 4 sites exceed Pb/Cd limits."],["Awareness & Outreach",10,3,"6 programmes, 4,050 people reached. Biggest gap to benchmark."]];
+const EL=[["73","Ta","Tantalum","180.95","Detected optically and extracted with precision for maximum recovery."],["41","Nb","Niobium","92.91","Robotic dismantling isolates Nb-containing components safely."],["31","Ga","Gallium","69.72","Recovered through acid leaching and chemical reduction."],["46","Pd","Palladium","106.42","Separated via hydrothermal buffering and precision filtration."],["17","RE","Rare earths","17 elements","Recovered and refined with targeted extraction methods."]];
+const ITEMS=[
+{t:"Heavy Metals & E-Waste Risks",d:"Problems associated with Pb, Cr, As, Cd and Hg in e-waste.",f:"Assignment",k:"none"},
+{t:"Indian Companies Following E-Waste Rules",d:"EPR, take-back schemes and RoHS compliance across producers.",f:"Report",k:"none"},
+{t:"E-Waste Comparison Overview",d:"Handwritten country comparison: 2015 vs 2019, CAGR and collection rates.",f:"Handwritten · Image",k:"img",u:"files/country-comparison.jpg"},
+{t:"Maharashtra E-Waste Paradox",d:"Visibility, collection and governance of the state’s e-waste stream.",f:"Report",k:"none"},
+{t:"State E-Waste Tracker",d:"Uttar Pradesh case study: six districts, seven categories, 72/100.",f:"Case study · PDF",k:"pdf",u:"files/up-case-study.pdf"},
+{t:"Tracker Workbook",d:"Seven-sheet dataset and scorecard behind the UP case study.",f:"Workbook · XLSX",k:"xls",u:"files/state-ewaste-tracker.xlsx"},
+{t:"Carbon Footprint Task",d:"Carbon accounting workbook: Table 7, offsets, Jan to Aug 2026.",f:"Workbook · XLSX",k:"xls",u:"files/carbon-footprint.xlsx"},
+{t:"PCB Sorting Techniques",d:"The Elements: Ta, Nb, Ga, Pd and rare earths in a combinatory sort.",f:"Infographic · Image",k:"img",u:"files/elements-infographic.jpeg"},
+{t:"E-Waste Activity Map",d:"Kerala e-waste production and recycling rate (2025), district map.",f:"Infographic · Image",k:"img",u:"files/kerala-infographic.png"},
+{t:"Automated Laser-Assisted PCB Recovery",d:"Vision-guided laser pre-treatment and recovery line concept.",f:"Design patent",k:"none"},
+{t:"LEED v5 Green Building Score Studio",d:"Interactive green building score calculator.",f:"Interactive tool",k:"none"},
+{t:"10 E-Waste Case Studies",d:"Country and city case studies with SWOT and recommendations.",f:"Case study report",k:"none"}];
+// ticker
+const TK=["UP scored 72/100 · GOOD band","3,238 t generated across 6 districts","5 authorised recyclers · 23,000 t/yr capacity","Kerala 2025: 22,025 t generated","Awareness is the weakest category: 3/10","Recycling: 20/20, the strongest category","Global e-waste could hit 106 Mt by 2050"];
+const tkh=TK.map(x=>`<span>${x}</span>`).join("");$("#tk").innerHTML=tkh+tkh;
+// hero title
+let ci=0;const L=(s,c)=>[...s].map(ch=>`<span class="ch ${c||""}" style="animation-delay:${ci++*55+150}ms">${ch==" "?"&nbsp;":ch}</span>`).join("");
+$("#h1").innerHTML=L("Krishna ")+L("Somani","s")+"<br>"+L("E-Waste Portfolio");
+// dashboard
+$("#dist").innerHTML=DIST.map(d=>`<div class="dr mono"><span>${d[0]}</span><div><div class="tr g"><i style="--w:${d[1]/652*100}%"></i></div><div class="tr"><i style="--w:${d[2]/652*100}%"></i></div></div><b>${d[2]}</b></div>`).join("");
+// scorecard
+$("#sc").innerHTML=SC.map((s,i)=>`<div data-r="${i%2?"r":"l"}" style="--d:${i*70}ms"><button class="line"><span>${s[0]}</span><span class="v mono">${s[2]}/${s[1]}</span><div class="tr"><i style="--w:${s[2]/s[1]*100}%"></i></div></button><div class="det">${s[3]}</div></div>`).join("");
+$$("#sc .line").forEach(b=>b.onclick=()=>b.nextElementSibling.classList.toggle("o"));
+// elements
+$("#el").innerHTML=EL.map((e,i)=>`<div class="tile mono" tabindex="0" data-r="u" style="--d:${i*110}ms"><div><div class="a"><em>${e[0]}</em><strong>${e[1]}</strong><span>${e[2]}<br>${e[3]}</span></div><div class="b">${e[4]}</div></div></div>`).join("");
+$$(".tile").forEach(t=>{t.onclick=()=>t.classList.toggle("f");t.onkeydown=e=>{if(e.key=="Enter"||e.key==" "){e.preventDefault();t.classList.toggle("f")}}});
+// archive
+const dlg=$("#dlg");
+$("#list").innerHTML=ITEMS.map((x,i)=>`<div class="row" data-r="${i%2?"r":"l"}" data-k="${x.k=="none"?"no":"ok"}"><div class="th mono">${x.k=="img"?`<img loading="lazy" src="${x.u}" alt="">`:x.k=="pdf"?"PDF":x.k=="xls"?"XLSX":"—"}</div><div><h3>${x.t}</h3><p>${x.d}</p><div class="meta mono">${x.f}</div></div><button class="op mono" data-i="${i}"><span>Open</span></button></div>`).join("");
+$$(".chip[data-f]").forEach(c=>c.onclick=()=>{$$(".chip[data-f]").forEach(z=>z.classList.toggle("on",z==c));$$(".row").forEach(r=>{const h=c.dataset.f!="all"&&r.dataset.k!=c.dataset.f;r.style.display=h?"none":""})});
+$$(".th").forEach(t=>{t.parentElement.onpointermove=e=>{const r=t.getBoundingClientRect();t.style.transform=`perspective(300px) rotateY(${((e.clientX-r.left)/r.width-.5)*30}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*30}deg)`};t.parentElement.onpointerleave=()=>t.style.transform=""});
+function show(t,h){$("#dt").textContent=t;$("#dbody").innerHTML=h;dlg.showModal()}
+$$("button.op").forEach(b=>b.onclick=()=>{const x=ITEMS[b.dataset.i];
+if(x.k=="img"){show(x.t,`<img src="${x.u}" alt="${x.t}">`);boom()}
+else if(x.k=="pdf"){window.open(x.u,"_blank");boom()}
+else if(x.k=="xls"){const a=document.createElement("a");a.href=x.u;a.download="";a.click();boom()}
+else{b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");setTimeout(()=>show(x.t,"<p><b>Not available yet.</b> This file hasn’t been added to the portfolio.</p>"),380)}});
+$("#dc").onclick=()=>dlg.close();dlg.onclick=e=>{if(e.target==dlg)dlg.close()};
+// reveal + counters
+const cnt=el=>{const n=+el.dataset.n,s=el.dataset.s||"",t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-p,3);el.textContent=Math.round(n*e).toLocaleString("en-IN")+s;if(p<1)requestAnimationFrame(f)})(t0)};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);e.target.querySelectorAll&&e.target.querySelectorAll("[data-n]").forEach(cnt)}}),{threshold:.15});
+$$("[data-r]").forEach(e=>io.observe(e));
+// score total counts when visible
+const tot=$(".tot"),tio=new IntersectionObserver(es=>{if(es[0].isIntersecting){tio.disconnect();const t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1800);tot.firstChild.nodeValue=Math.round(72*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}});tio.observe(tot);
+// colour journey on scroll
+const STOPS=[["#f4efe3","#1b1a17","#d9731a","#6b665a"],["#f6d9ae","#1f1608","#b3470f","#6b5430"],["#cfe2d2","#10231a","#c2410c","#3f5a4a"],["#1b1a17","#f4efe3","#f2a33a","#b5ae9a"],["#ecd2ca","#2a1411","#a63d2b","#6e5650"],["#f4efe3","#1b1a17","#d9731a","#6b665a"]].map(r=>r.map(h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16))));
+const secs=$$("[data-t]"),root=document.documentElement;let CUR=STOPS[0];
+function theme(){const y=scrollY+innerHeight*.5,c=secs.map(s=>s.offsetTop+s.offsetHeight/2);let i=0;while(i<c.length-2&&y>c[i+1])i++;const t=Math.max(0,Math.min(1,(y-c[i])/(c[i+1]-c[i]))),e=t*t*(3-2*t);
+CUR=STOPS[i].map((a,k)=>a.map((v,j)=>Math.round(v+(STOPS[i+1][k][j]-v)*e)));
+["--bg","--ink","--ac","--mut"].forEach((n,k)=>root.style.setProperty(n,`rgb(${CUR[k]})`));
+$("#bar").style.width=scrollY/(document.body.scrollHeight-innerHeight)*100+"%";
+$$("[data-px]").forEach(b=>b.style.transform=`translateY(${(scrollY-b.parentElement.offsetTop)*b.dataset.px}px)`)}
+let tk=0;addEventListener("scroll",()=>{if(!tk){tk=1;requestAnimationFrame(()=>{theme();tk=0})}},{passive:true});addEventListener("resize",theme);theme();
+// background canvas: circuit traces, pulses, drifting parts
+const cv=$("#bg"),cx=cv.getContext("2d");let W,H,TR=[],PT=[],M={x:-999,y:-999};
+const R=(a,b)=>a+Math.random()*(b-a);
+function init(){W=cv.width=innerWidth;H=cv.height=innerHeight;TR=[];PT=[];
+for(let i=0;i<7;i++){let x=R(0,W),y=R(0,H),pts=[[x,y]],h=Math.random()<.5;for(let s=0;s<6;s++){const d=R(60,200)*(Math.random()<.5?-1:1);h?x+=d:y+=d;pts.push([x,y]);h=!h}
+let L=[],tot=0;for(let k=1;k<pts.length;k++){const l=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);L.push(l);tot+=l}TR.push({pts,L,tot,t:R(0,1),v:R(.0007,.0016)})}
+for(let i=0;i<(W<600?9:16);i++)PT.push({x:R(0,W),y:R(0,H),vx:R(-.25,.25),vy:R(-.25,.25),r:R(0,6.28),vr:R(-.006,.006),ty:i%5,s:R(14,26)})}
+function part(p){cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);const s=p.s;cx.beginPath();
+if(p.ty==0){cx.rect(-s/2,-s/2,s,s);for(let i=-1;i<=1;i++){cx.moveTo(i*s/3,-s/2);cx.lineTo(i*s/3,-s/2-5);cx.moveTo(i*s/3,s/2);cx.lineTo(i*s/3,s/2+5)}}
+else if(p.ty==1){cx.rect(-s,-s/2.2,s*2,s/1.1);cx.rect(s,-s/5,4,s/2.5)}
+else if(p.ty==2){cx.arc(0,-3,s/1.7,0,6.28);cx.rect(-s/4,s/2.2,s/2,s/3)}
+else if(p.ty==3){cx.rect(-s/2.4,-s,s/1.2,s*2);cx.moveTo(-3,s-5);cx.lineTo(3,s-5)}
+else{cx.arc(0,0,s/1.5,0,Math.PI);cx.moveTo(-s/1.5,0);cx.lineTo(-s/1.5,-s/1.3);cx.moveTo(s/1.5,0);cx.lineTo(s/1.5,-s/1.3)}
+cx.stroke();cx.restore()}
+function draw(){if(document.hidden){requestAnimationFrame(draw);return}
+cx.clearRect(0,0,W,H);const ink=`rgba(${CUR[1]},.2)`,ac=CUR[2];
+cx.lineWidth=1.2;cx.strokeStyle=`rgba(${ac},.22)`;
+TR.forEach(t=>{cx.beginPath();t.pts.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.stroke();
+cx.fillStyle=`rgba(${ac},.35)`;t.pts.forEach(p=>{cx.beginPath();cx.arc(p[0],p[1],3,0,6.28);cx.fill()});
+t.t=(t.t+t.v)%1;let d=t.t*t.tot,k=0;while(k<t.L.length-1&&d>t.L[k]){d-=t.L[k];k++}const a=t.pts[k],b=t.pts[k+1],f=d/t.L[k];
+cx.fillStyle=`rgba(${ac},.95)`;cx.shadowBlur=0;cx.beginPath();cx.arc(a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f,4,0,6.28);cx.fill()});
+cx.strokeStyle=ink;cx.lineWidth=1.5;
+PT.forEach(p=>{const dx=p.x-M.x,dy=p.y-M.y,d=Math.hypot(dx,dy);if(d<150){p.vx+=dx/d*.05;p.vy+=dy/d*.05}
+p.vx*=.995;p.vy*=.995;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;if(p.x<-40)p.x=W+40;if(p.x>W+40)p.x=-40;if(p.y<-40)p.y=H+40;if(p.y>H+40)p.y=-40;part(p)});
+requestAnimationFrame(draw)}
+if(!RM){init();draw();addEventListener("resize",init);addEventListener("pointermove",e=>{M.x=e.clientX;M.y=e.clientY})}
+// confetti burst
+const fx=$("#fx"),fc=fx.getContext("2d");let CF=[];
+function boom(){if(RM)return;fx.width=innerWidth;fx.height=innerHeight;const cols=["#3f9b6a","#d9731a","#f2c14e","#1b1a17","#7bc8a0"];
+for(let i=0;i<70;i++)CF.push({x:innerWidth/2,y:innerHeight/2,vx:R(-9,9),vy:R(-13,-2),g:.35,r:R(0,6),vr:R(-.3,.3),c:cols[i%5],w:R(5,10),l:70});if(CF.length==70)cf()}
+function cf(){fc.clearRect(0,0,fx.width,fx.height);CF=CF.filter(p=>p.l>0);CF.forEach(p=>{p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l--;fc.save();fc.translate(p.x,p.y);fc.rotate(p.r);fc.fillStyle=p.c;fc.globalAlpha=Math.min(1,p.l/25);fc.fillRect(-p.w/2,-p.w/4,p.w,p.w/2);fc.restore()});if(CF.length)requestAnimationFrame(cf);else fc.clearRect(0,0,fx.width,fx.height)}
+</script></body></html>
